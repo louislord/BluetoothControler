@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BluetoothControler</string>
+    <string name="title_status">Status</string>
+    <string name="title_setting">Setting</string>
+    <string name="title_iv">IV</string>
+    <string name="title_more">More</string>
+</resources>
