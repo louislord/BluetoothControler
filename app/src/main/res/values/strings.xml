@@ -4,4 +4,17 @@
     <string name="title_setting">Setting</string>
     <string name="title_iv">IV</string>
     <string name="title_more">More</string>
+
+    <string name="app_status_connected">Connected</string>
+    <string name="app_status_unconnected">Unconnected</string>
+    <string name="app_status_device_status">Device Status</string>
+    <string name="app_status_recovering">Recovering</string>
+    <string name="app_status_unrecoverd">Un-Recoverd</string>
+    <string name="app_status_recoverd">Recoverd</string>
+    <string name="app_status_before_recover">Before Recovery</string>
+    <string name="app_status_after_recover">After Recovery</string>
+    <string name="app_status_recover_result">Recoverd result</string>
+    <string name="app_status_remark">Remark</string>
+    <string name="app_status_recover_rules">Recovery Rules：</string>
+    <string name="app_status_default">Default</string>
 </resources>
