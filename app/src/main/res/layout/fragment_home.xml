@@ -18,30 +18,18 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/text_home"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
                 android:id="@+id/txBluetooth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="10dp"
                 android:drawableLeft="@drawable/ic_bluetooth_black_24dp"
                 android:drawablePadding="5dp"
                 android:text="@string/app_status_unconnected"
                 android:textColor="@color/base_black"
-                android:textSize="18sp"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/txDeviceStatus"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_home" />
+                app:layout_constraintTop_toTopOf="@+id/txDeviceStatus" />
 
             <TextView
                 android:id="@+id/txDeviceStatus"
@@ -50,12 +38,23 @@
                 android:drawablePadding="5dp"
                 android:text="@string/app_status_device_status"
                 android:textColor="@color/base_black"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@+id/text_home"
-                app:layout_constraintHorizontal_bias="0.542"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgStatusIcon"
+                app:layout_constraintEnd_toStartOf="@+id/imgStatusIcon"
+                app:layout_constraintHorizontal_bias="0.921"
                 app:layout_constraintStart_toEndOf="@+id/txBluetooth"
-                app:layout_constraintTop_toBottomOf="@+id/text_home" />
+                app:layout_constraintTop_toTopOf="@+id/imgStatusIcon"
+                app:layout_constraintVertical_bias="1.0" />
 
+            <ImageView
+                android:id="@+id/imgStatusIcon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="25dp"
+                android:src="@drawable/circle_red"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
             <LinearLayout
                 android:id="@+id/llPvs"
                 android:layout_width="match_parent"
@@ -538,34 +537,34 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/base_black"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:text="@string/app_status_recover_rules"/>
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:padding="5dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="35dp"
                         android:textColor="@color/base_white"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:gravity="center"
                         android:textAllCaps="false"
                         android:text="@string/app_status_default"
                         android:background="@drawable/app_shape_btn_bg"
                         android:layout_marginStart="5dp"
-                        android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
                         android:drawablePadding="3dp"/>
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:padding="5dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="35dp"
                         android:textColor="@color/base_white"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:gravity="center"
                         android:textAllCaps="false"
                         android:text="PV1"
@@ -577,9 +576,9 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:padding="5dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="35dp"
                         android:textColor="@color/base_white"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:gravity="center"
                         android:textAllCaps="false"
                         android:text="Stop"
