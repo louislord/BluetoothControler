@@ -11,5 +11,17 @@
         <!-- AppCompatEditText选择的底线颜色 -->
         <item name="colorControlActivated">#40454F</item>
     </style>
-
+    <style name="myProgressBarStyleLarge2">
+        　　
+        <item name="android:indeterminateDrawable">@drawable/rotate_testing_icon</item>
+        <item name="android:indeterminateDuration">1500</item>
+        　　
+        <item name="android:minWidth">50dip</item>
+        　　
+        <item name="android:maxWidth">50dip</item>
+        　　
+        <item name="android:minHeight">50dip</item>
+        　　
+        <item name="android:maxHeight">50dip</item>
+    </style>
 </resources>
