@@ -605,6 +605,9 @@ public class BluetoothActivity extends AppCompatActivity implements View.OnClick
             while (true) {
                 try {
                     bytes = inputStream.read(buff);
+                    if (bytes == 0){
+                        return;
+                    }
                     String str = new String(buff, "ISO-8859-1");
                     str = str.substring(0, bytes);
 
