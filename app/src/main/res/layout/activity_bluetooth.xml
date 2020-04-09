@@ -47,9 +47,11 @@
         android:layout_width="40dp"
         android:layout_height="20dp"
         android:gravity="center"
+        android:visibility="gone"
         android:text="LED1"/>
     <TextView
         android:id="@+id/led0"
+        android:visibility="gone"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/led1"
         android:layout_width="40dp"
@@ -58,6 +60,7 @@
         android:text="+"/>
     <TextView
         android:id="@+id/led3"
+        android:visibility="gone"
         android:layout_below="@+id/led1"
         android:layout_toLeftOf="@+id/led1"
         android:layout_width="40dp"
@@ -65,6 +68,7 @@
         android:gravity="center"
         android:text="LED3"/>
     <TextView
+        android:visibility="gone"
         android:id="@+id/led2"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/led3"
@@ -73,6 +77,7 @@
         android:gravity="center"
         android:text="LED2"/>
     <TextView
+        android:visibility="gone"
         android:id="@+id/led4"
         android:layout_below="@+id/led1"
         android:layout_toRightOf="@+id/led1"
@@ -82,15 +87,15 @@
         android:text="LED4"/>
     <Button
         android:id="@+id/btn_options"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_alignBaseline="@+id/led4"
+        android:layout_below="@+id/linear_layout_top"
         android:layout_alignParentEnd="true"
-        android:text="Options"/>
+        android:text="服务端"/>
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll_view"
-        android:layout_below="@+id/led2"
+        android:layout_below="@+id/btn_options"
         android:layout_above="@+id/linear_layout_bottom"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

@@ -3,6 +3,7 @@ package com.example.bloothcontroler.ui;
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -56,6 +57,7 @@ public class BluetoothActivity extends AppCompatActivity implements View.OnClick
 
     private ConnectThread connectThread = null;
     private ConnectedThread connectedThread = null;
+    private AcceptThread acceptThread = null;
 
     private TextView noticeView = null;
     private Button turnOnOff = null;
@@ -213,6 +215,7 @@ public class BluetoothActivity extends AppCompatActivity implements View.OnClick
 
     private boolean isOn = false;
     private boolean isSearching = false;
+    private boolean asServer = false;
     int REQUEST_ENABLE_BT = 1;
 
     private void doSearchOrCancel(){
@@ -251,16 +254,24 @@ public class BluetoothActivity extends AppCompatActivity implements View.OnClick
                 }
                 break;
             case R.id.btn_options:
-                //创建弹出式菜单对象（最低版本11）
-                PopupMenu popup = new PopupMenu(this, view);//第二个参数是绑定的那个view
-                //获取菜单填充器
-                MenuInflater inflater = popup.getMenuInflater();
-                //填充菜单
-                inflater.inflate(R.menu.menu_main, popup.getMenu());
-                //绑定菜单项的点击事件
-                popup.setOnMenuItemClickListener(this);
-                //显示(这一行代码不要忘记了)
-                popup.show();
+//                //创建弹出式菜单对象（最低版本11）
+//                PopupMenu popup = new PopupMenu(this, view);//第二个参数是绑定的那个view
+//                //获取菜单填充器
+//                MenuInflater inflater = popup.getMenuInflater();
+//                //填充菜单
+//                inflater.inflate(R.menu.menu_main, popup.getMenu());
+//                //绑定菜单项的点击事件
+//                popup.setOnMenuItemClickListener(this);
+//                //显示(这一行代码不要忘记了)
+//                popup.show();
+                if (bluetoothAdapter.isEnabled() && !isSearching && !asServer){
+                    asServer = true;
+                    btnScan.setVisibility(View.GONE);
+                    if (acceptThread == null){
+                        acceptThread = new AcceptThread();
+                        acceptThread.start();
+                    }
+                }
                 break;
             case R.id.turn_on_off: // 发送'0'或者'1'都可以
                 if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
@@ -457,6 +468,63 @@ public class BluetoothActivity extends AppCompatActivity implements View.OnClick
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * 作为服务端接收链接
+     */
+    private class AcceptThread extends Thread {
+        private final BluetoothServerSocket mmServerSocket;
+        private final String MY_UUID = "00001101-0000-1000-8000-00805F9B34FB";
+        public AcceptThread() {
+            // Use a temporary object that is later assigned to mmServerSocket
+            // because mmServerSocket is final.
+            BluetoothServerSocket tmp = null;
+            try {
+                // MY_UUID is the app's UUID string, also used by the client code.
+                tmp = bluetoothAdapter.listenUsingRfcommWithServiceRecord("BCServer", UUID.fromString(MY_UUID));
+            } catch (IOException e) {
+                Log.e(TAG, "Socket's listen() method failed", e);
+            }
+            mmServerSocket = tmp;
+        }
+
+        public void run() {
+            BluetoothSocket socket = null;
+            // Keep listening until exception occurs or a socket is returned.
+            while (true) {
+                try {
+                    socket = mmServerSocket.accept();
+                } catch (IOException e) {
+                    Log.e(TAG, "Socket's accept() method failed", e);
+                    break;
+                }
+
+                if (socket != null) {
+//                     A connection was accepted. Perform work associated with
+                    Log.e(TAG, "A connection was accepted. Perform work associated");
+                    // the connection in a separate thread.
+//                    manageMyConnectedSocket(socket);
+                    connectedThread = new ConnectedThread(socket);
+                    connectedThread.start();
+                    try {
+                        mmServerSocket.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                }
+            }
+        }
+
+        // Closes the connect socket and causes the thread to finish.
+        public void cancel() {
+            try {
+                mmServerSocket.close();
+            } catch (IOException e) {
+                Log.e(TAG, "Could not close the connect socket", e);
+            }
+        }
     }
 
     private class ConnectThread extends Thread {
