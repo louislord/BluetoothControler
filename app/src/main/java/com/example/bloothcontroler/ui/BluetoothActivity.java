@@ -36,6 +36,7 @@ import androidx.recyclerview.widget.RecyclerView.LayoutManager;
 
 import com.example.bloothcontroler.R;
 import com.example.bloothcontroler.base.BaseRcvAdapter;
+import com.example.bloothcontroler.service.BluetoothDataIOServer;
 import com.example.bloothcontroler.ui.adapter.DeviceListAdapter;
 
 import java.io.IOException;
@@ -548,8 +549,9 @@ public class BluetoothActivity extends AppCompatActivity implements View.OnClick
             bluetoothAdapter.cancelDiscovery();
             try {
                 socket.connect();
-                connectedThread = new ConnectedThread(socket);
-                connectedThread.start();
+//                connectedThread = new ConnectedThread(socket);
+//                connectedThread.start();
+                BluetoothDataIOServer.getInstance().initWithSocket(socket);
             } catch (IOException e) {
                 try {
                     socket.close();

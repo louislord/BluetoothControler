@@ -31,6 +31,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onChanged(@Nullable String s) {
 //                textView.setText(s);
+                binding.txBluetooth.setText(s);
             }
         });
         return binding.getRoot();

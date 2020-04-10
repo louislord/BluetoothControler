@@ -33,7 +33,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         dashboardViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-
+                binding.edPamx.setText(s);
             }
         });
         return binding.getRoot();

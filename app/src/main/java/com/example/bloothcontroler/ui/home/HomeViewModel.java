@@ -5,15 +5,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+import com.example.bloothcontroler.base.BaseBCViewModel;
+import com.example.bloothcontroler.service.BluetoothDataIOServer;
 
-    private MutableLiveData<String> mText;
-    public HomeViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
-    }
+public class HomeViewModel extends BaseBCViewModel {
 
-    public LiveData<String> getText() {
-        return mText;
-    }
 }
