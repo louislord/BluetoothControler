@@ -1,6 +1,5 @@
 package com.example.bloothcontroler;
 
-import com.example.bloothcontroler.service.CRCUtil;
 import com.example.bloothcontroler.service.OrderCreater;
 
 import org.junit.Test;
@@ -22,9 +21,12 @@ public class ExampleUnitTest {
 
     @Test
     public void testCRC(){
-        byte[] bytes = new byte[]{0x01,0x04,0x30,0x01,0x00,0x01};
-        System.out.println(Integer.toHexString(CRCUtil.getCRC(bytes)));
-        byte[] bytes2 = OrderCreater.getOrder(bytes);
+//        byte[] bytes = new byte[]{0x01,0x04,0x30,0x01,0x00,0x01};
+//        System.out.println(Integer.toHexString(CRCUtil.getCRC(bytes)));
+        byte[] bytes2 = OrderCreater.generalReadOrder(30001,1);
         System.out.println(Arrays.toString(bytes2));
+        System.out.println(Arrays.toString(OrderCreater.setDefault()));
+        System.out.println(Arrays.toString(OrderCreater.startCircle(1)));
+        System.out.println(Arrays.toString(OrderCreater.startOrStop(true)));
     }
 }
