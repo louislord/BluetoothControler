@@ -13,6 +13,11 @@ import com.example.bloothcontroler.service.BluetoothDataIOServer;
  */
 public abstract class BaseBCViewModel extends ViewModel {
     private BluetoothDataIOServer mText;
+
+    public boolean isBTConnected (){
+        return mText.isConnected();
+    }
+
     protected BaseBCViewModel(){
         mText = BluetoothDataIOServer.getInstance();
     }
@@ -21,7 +26,7 @@ public abstract class BaseBCViewModel extends ViewModel {
         return mText;
     }
 
-    public void sendOrder(String order){
+    public void sendOrder(byte[] order){
         if (null != mText){
             mText.sendOrder(order);
         }

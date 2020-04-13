@@ -555,6 +555,7 @@
                             android:text="@string/app_status_recover_rules" />
 
                         <TextView
+                            android:id="@+id/tvDefault"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:padding="5dp"
@@ -569,6 +570,7 @@
                             android:drawablePadding="3dp" />
 
                         <TextView
+                            android:id="@+id/tvPVModel"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:padding="5dp"
@@ -584,6 +586,7 @@
                             android:drawablePadding="3dp" />
 
                         <TextView
+                            android:id="@+id/tvStop"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:padding="5dp"
@@ -595,7 +598,6 @@
                             android:text="Stop"
                             android:background="@drawable/app_shape_btn_bg"
                             android:layout_marginStart="5dp"
-                            android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
                             android:drawablePadding="3dp" />
                     </LinearLayout>
 

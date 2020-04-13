@@ -20,12 +20,20 @@ import java.nio.ByteBuffer;
  */
 public class BluetoothDataIOServer extends MutableLiveData<String> {
 
+    private boolean isConnected;
+
+    public boolean isConnected() {
+        return isConnected;
+    }
+
     private BluetoothDataIOServer(){
 
     }
+
     private static class SingleHolder{
         static BluetoothDataIOServer server = new BluetoothDataIOServer();
     }
+
     public static BluetoothDataIOServer getInstance(){
         return SingleHolder.server;
     }
@@ -55,6 +63,12 @@ public class BluetoothDataIOServer extends MutableLiveData<String> {
     public void sendOrder(String order){
         if (bluetoothIOThread != null && order != null){
             bluetoothIOThread.write(order.getBytes());
+        }
+    }
+
+    public void sendOrder(byte[] order){
+        if (bluetoothIOThread != null && order != null){
+            bluetoothIOThread.write(order);
         }
     }
 
@@ -92,7 +106,7 @@ public class BluetoothDataIOServer extends MutableLiveData<String> {
             Bundle tmpBundle = new Bundle();
             Message tmpMessage = new Message();
             tmpBundle.putString("notice", "连接成功");
-
+            isConnected = true;
 
             while (true) {
                 try {
