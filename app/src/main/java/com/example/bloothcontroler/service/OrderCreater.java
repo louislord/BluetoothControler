@@ -96,7 +96,11 @@ public class OrderCreater {
     public static final int PV4_128IVP_V = 60911;
 
 
-
+    /**
+     * 添加校验位
+     * @param bytes
+     * @return
+     */
     private static byte[] getOrder(byte[] bytes){
         int crc = CRCUtil.getCRC(bytes);
         byte low = (byte) (crc & 0x00FF);
@@ -108,6 +112,12 @@ public class OrderCreater {
         return order;
     }
 
+    /**
+     * 通用读指令
+     * @param registerAddress
+     * @param registerNum
+     * @return
+     */
     public static byte[] generalReadOrder(int registerAddress, int registerNum){
         byte[] order = new byte[6];
         order[0] = 0x01;//从机地址 默认0x01
@@ -123,6 +133,13 @@ public class OrderCreater {
         return getOrder(order);
     }
 
+    /**
+     * 通用写指令
+     * @param registerAddress
+     * @param registerNum
+     * @param writeData
+     * @return
+     */
     private static byte[] generalWriteOrder(int registerAddress,int registerNum,int writeData){
         byte[] order = new byte[11];
         order[0] = 0x01;//从机地址 默认0x01

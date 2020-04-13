@@ -18,7 +18,7 @@ import java.nio.ByteBuffer;
  * @Description
  * @update [序号][日期YYYY-MM-DD] [更改人姓名][变更描述]
  */
-public class BluetoothDataIOServer extends MutableLiveData<String> {
+public class BluetoothDataIOServer extends MutableLiveData<DataMessage> {
 
     private boolean isConnected;
 
@@ -104,10 +104,11 @@ public class BluetoothDataIOServer extends MutableLiveData<String> {
             byte[] buff = new byte[1024];
             int bytes;
             Bundle tmpBundle = new Bundle();
-            Message tmpMessage = new Message();
+            DataMessage message = new DataMessage();
             tmpBundle.putString("notice", "连接成功");
+            message.what = DataMessage.CONNECT_STATUS;
             isConnected = true;
-
+            postValue(message);
             while (true) {
                 try {
                     bytes = inputStream.read(buff);
@@ -130,7 +131,7 @@ public class BluetoothDataIOServer extends MutableLiveData<String> {
 //                    }
 //                    recvText.append(str.substring(0, str.length() - 1)); // 去除'#'
 
-                    postValue(str);
+                    postValue(message);
                 } catch (IOException e) {
                     e.printStackTrace();
                     break;

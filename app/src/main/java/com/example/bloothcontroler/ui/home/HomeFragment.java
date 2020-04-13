@@ -21,6 +21,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.bloothcontroler.R;
 import com.example.bloothcontroler.databinding.FragmentHomeBinding;
 import com.example.bloothcontroler.service.BluetoothDataIOServer;
+import com.example.bloothcontroler.service.DataMessage;
 import com.example.bloothcontroler.service.OrderCreater;
 import com.example.bloothcontroler.ui.BluetoothActivity;
 
@@ -33,14 +34,29 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false);
-        homeViewModel.getText().observe(this, new Observer<String>() {
+        homeViewModel.getText().observe(this, new Observer<DataMessage>() {
             @Override
-            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-                binding.txBluetooth.setText(s);
+            public void onChanged(@Nullable DataMessage s) {
+                handleMessage(s);
             }
         });
         return binding.getRoot();
+    }
+
+    private void handleMessage(DataMessage message) {
+        if (null != message) {
+            switch (message.what) {
+                case DataMessage.CONNECT_STATUS:
+                    if (homeViewModel.isBTConnected()) {
+                        binding.txBluetooth.setText(getString(R.string.app_status_connected));
+                    } else {
+                        binding.txBluetooth.setText(getString(R.string.app_status_unconnected));
+                    }
+                    break;
+                case DataMessage.RECEVED_STATUS_DATA:
+                    break;
+            }
+        }
     }
 
     @Override

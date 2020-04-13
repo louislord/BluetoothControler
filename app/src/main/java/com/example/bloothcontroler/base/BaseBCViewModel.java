@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.bloothcontroler.service.BluetoothDataIOServer;
+import com.example.bloothcontroler.service.DataMessage;
 
 /**
  * @author Hanwenhao
@@ -22,7 +23,7 @@ public abstract class BaseBCViewModel extends ViewModel {
         mText = BluetoothDataIOServer.getInstance();
     }
 
-    public LiveData<String> getText() {
+    public LiveData<DataMessage> getText() {
         return mText;
     }
 

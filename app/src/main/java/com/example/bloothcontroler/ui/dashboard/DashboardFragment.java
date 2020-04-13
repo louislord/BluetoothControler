@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.bloothcontroler.R;
 import com.example.bloothcontroler.databinding.FragmentDashboardBinding;
+import com.example.bloothcontroler.service.DataMessage;
 
 public class DashboardFragment extends Fragment implements View.OnClickListener {
 
@@ -30,13 +31,22 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                 ViewModelProviders.of(this).get(DashboardViewModel.class);
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_dashboard,container,false);
         binding.setModel(dashboardViewModel);
-        dashboardViewModel.getText().observe(this, new Observer<String>() {
+        dashboardViewModel.getText().observe(this, new Observer<DataMessage>() {
             @Override
-            public void onChanged(@Nullable String s) {
-                binding.edPamx.setText(s);
+            public void onChanged(@Nullable DataMessage s) {
+                handleMessage(s);
             }
         });
         return binding.getRoot();
+    }
+
+    private void handleMessage(DataMessage message) {
+        if (null != message) {
+            switch (message.what) {
+                case DataMessage.RECEVED_SETTING_DATA:
+                    break;
+            }
+        }
     }
 
     @Override

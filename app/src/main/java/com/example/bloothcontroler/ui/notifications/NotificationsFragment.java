@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.bloothcontroler.R;
+import com.example.bloothcontroler.service.DataMessage;
 
 public class NotificationsFragment extends Fragment {
 
@@ -24,9 +25,9 @@ public class NotificationsFragment extends Fragment {
                 ViewModelProviders.of(this).get(NotificationsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
         final TextView textView = root.findViewById(R.id.text_notifications);
-        notificationsViewModel.getText().observe(this, new Observer<String>() {
+        notificationsViewModel.getText().observe(this, new Observer<DataMessage>() {
             @Override
-            public void onChanged(@Nullable String s) {
+            public void onChanged(@Nullable DataMessage s) {
 //                textView.setText(s);
             }
         });
