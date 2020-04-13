@@ -43,6 +43,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -316,9 +317,10 @@ public class BluetoothActivity extends AppCompatActivity implements View.OnClick
                     Toast.makeText(this, "未连接设备", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                String inputText = sendText.getText().toString() + "@#"; // 发送给单片机数据以"@#结尾"，这样单片机知道一条数据发送结束
-                //Toast.makeText(MainActivity.this, inputText, Toast.LENGTH_SHORT).show();
-                connectedThread.write(inputText.getBytes());
+                String inputText = sendText.getText().toString(); // 发送数据
+                if (inputText.length() > 0){
+                    connectedThread.write(inputText.getBytes());
+                }
                 break;
 
             default:
@@ -613,15 +615,18 @@ public class BluetoothActivity extends AppCompatActivity implements View.OnClick
 
                     // 收到数据，单片机发送上来的数据以"#"结束，这样手机知道一条数据发送结束
                     //Log.e("read", str);
-                    if (!str.endsWith("#")) {
-                        recvText.append(str);
-                        continue;
-                    }
-                    recvText.append(str.substring(0, str.length() - 1)); // 去除'#'
+                    byte[] data = new byte[11];
+                    System.arraycopy(buff,0,data,0,data.length);
+
+//                    if (!str.endsWith("#")) {
+//                        recvText.append(str);
+//                        continue;
+//                    }
+//                    recvText.append(str.substring(0, str.length() - 1)); // 去除'#'
 
                     Bundle bundle = new Bundle();
                     Message message = new Message();
-
+                    recvText.append(Arrays.toString(data));
                     bundle.putString("recv", recvText.toString());
                     message.what = RECV_VIEW;
                     message.setData(bundle);
