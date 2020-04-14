@@ -25,8 +25,8 @@ public class ExampleUnitTest {
 //        System.out.println(Integer.toHexString(CRCUtil.getCRC(bytes)));
         byte[] bytes2 = OrderCreater.generalReadOrder(30001,1);
         System.out.println(Arrays.toString(bytes2));
-        System.out.println(Arrays.toString(OrderCreater.setDefault()));
-        System.out.println(Arrays.toString(OrderCreater.startCircle(1)));
-        System.out.println(Arrays.toString(OrderCreater.startOrStop(true)));
+        System.out.println(Arrays.toString(OrderCreater.readStatus()));
+//        System.out.println(Arrays.toString(OrderCreater.startCircle(1)));
+//        System.out.println(Arrays.toString(OrderCreater.startOrStop(true)));
     }
 }

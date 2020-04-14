@@ -184,4 +184,8 @@ public class OrderCreater {
             return generalWriteOrder(STOP_OR_START,1,2);
         }
     }
+
+    public static byte[] readStatus(){
+        return generalReadOrder(DEVICE_STATUS,23);
+    }
 }
