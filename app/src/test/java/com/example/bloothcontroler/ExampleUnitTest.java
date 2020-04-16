@@ -24,8 +24,13 @@ public class ExampleUnitTest {
 //        byte[] bytes = new byte[]{0x01,0x04,0x30,0x01,0x00,0x01};
 //        System.out.println(Integer.toHexString(CRCUtil.getCRC(bytes)));
         byte[] bytes2 = OrderCreater.generalReadOrder(30001,1);
+        int high = (bytes2[2] & 0xFFFF) << 8;
+        int low = bytes2[3];
+        int lastAddress = high + low;
         System.out.println(Arrays.toString(bytes2));
-        System.out.println(Arrays.toString(OrderCreater.readStatus()));
+        System.out.println(high);
+        System.out.println(low);
+        System.out.println(lastAddress);
 //        System.out.println(Arrays.toString(OrderCreater.startCircle(1)));
 //        System.out.println(Arrays.toString(OrderCreater.startOrStop(true)));
     }

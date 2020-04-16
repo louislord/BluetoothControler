@@ -21,11 +21,15 @@ import java.nio.ByteBuffer;
 public class BluetoothDataIOServer extends MutableLiveData<DataMessage> {
 
     private boolean isConnected;
-
+    private int pageTag;
+    private int lastAddress;
     public boolean isConnected() {
         return isConnected;
     }
 
+    public void setPageTag(int pageTag){
+        this.pageTag = pageTag;
+    }
     private BluetoothDataIOServer(){
 
     }
@@ -66,9 +70,12 @@ public class BluetoothDataIOServer extends MutableLiveData<DataMessage> {
         }
     }
 
-    public void sendOrder(byte[] order){
+    public synchronized void sendOrder(byte[] order){
         if (bluetoothIOThread != null && order != null){
             bluetoothIOThread.write(order);
+            if (order.length > 4){
+                lastAddress = order[2] << 8 + order[3];
+            }
         }
     }
 
@@ -153,6 +160,7 @@ public class BluetoothDataIOServer extends MutableLiveData<DataMessage> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            isConnected = false;
         }
     }
 }
