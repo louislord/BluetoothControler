@@ -1,5 +1,9 @@
 package com.example.bloothcontroler;
 
+import android.util.Log;
+
+import com.example.bloothcontroler.service.CRCUtil;
+import com.example.bloothcontroler.service.DataMessage;
 import com.example.bloothcontroler.service.OrderCreater;
 
 import org.junit.Test;
@@ -23,7 +27,7 @@ public class ExampleUnitTest {
     public void testCRC(){
 //        byte[] bytes = new byte[]{0x01,0x04,0x30,0x01,0x00,0x01};
 //        System.out.println(Integer.toHexString(CRCUtil.getCRC(bytes)));
-        byte[] bytes2 = OrderCreater.generalReadOrder(30001,1);
+        byte[] bytes2 = OrderCreater.generalReadOrder(30001,23);
         int high = (bytes2[2] & 0xFFFF) << 8;
         int low = bytes2[3];
         int lastAddress = high + low;
@@ -31,7 +35,33 @@ public class ExampleUnitTest {
         System.out.println(high);
         System.out.println(low);
         System.out.println(lastAddress);
-//        System.out.println(Arrays.toString(OrderCreater.startCircle(1)));
-//        System.out.println(Arrays.toString(OrderCreater.startOrStop(true)));
+
+        byte[] order = new byte[7];
+        order[0] = 0x01;//从机地址 默认0x01
+        order[1] = 0x04;
+        order[2] = 4;
+        int num1 = 20422;
+        int num2 = 33587;
+        byte highRA = (byte) ((num1 & 0xFF00) >> 8);
+        byte lowRA = (byte) (num1 & 0x00FF);
+        order[3] = highRA;
+        order[4] = lowRA;
+        byte highRN = (byte) ((num2 & 0xFF00) >> 8);
+        byte lowRN = (byte) (num2 & 0x00FF);
+        order[5] = highRN;
+        order[6] = lowRN;
+
+        byte[] data = OrderCreater.getOrder(order);
+
+        // 校验数据
+        if (CRCUtil.checkCRC(data) == 0){
+                    int datasize = data[2];
+                    byte[] receivedData = new byte[datasize];
+                    System.arraycopy(data, 3, receivedData, 0, datasize);
+                    DataMessage message = new DataMessage();
+                    message.setData(receivedData);
+                    message.setDataSize(datasize);
+            System.out.println(Arrays.toString(message.getData()));
+        }
     }
 }

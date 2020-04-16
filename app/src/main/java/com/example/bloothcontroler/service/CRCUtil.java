@@ -37,8 +37,8 @@ public class CRCUtil {
         if (bytes.length < 2){
             return -1;
         } else {
-            int high = bytes[bytes.length - 2] << 8;
-            int low = bytes[bytes.length - 1];
+            int high = (bytes[bytes.length - 2] & 0x00FF) << 8;
+            int low = bytes[bytes.length - 1] & 0x00FF;
             int datacrc = high + low;
             int CRC = 0xFFFF;
             int POLYNOMIAL = 0xA001;//CRC 16 MODBUS

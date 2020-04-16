@@ -101,7 +101,7 @@ public class OrderCreater {
      * @param bytes
      * @return
      */
-    private static byte[] getOrder(byte[] bytes){
+    public static byte[] getOrder(byte[] bytes){
         int crc = CRCUtil.getCRC(bytes);
         byte low = (byte) (crc & 0x00FF);
         byte high = (byte) ((crc & 0xFF00) >> 8);

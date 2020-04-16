@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 
 /**
  * @author Hanwenhao
@@ -74,7 +75,9 @@ public class BluetoothDataIOServer extends MutableLiveData<DataMessage> {
         if (bluetoothIOThread != null && order != null){
             bluetoothIOThread.write(order);
             if (order.length > 4){
-                lastAddress = order[2] << 8 + order[3];
+                int high = (order[2] & 0xFFFF) << 8;
+                int low = order[3];
+                lastAddress = high + low;
             }
         }
     }
@@ -124,21 +127,19 @@ public class BluetoothDataIOServer extends MutableLiveData<DataMessage> {
                     }
                     byte[] data = new byte[bytes];
                     System.arraycopy(buff, 0, data, 0, bytes);
+                    // 校验数据
                     if (CRCUtil.checkCRC(data) == 0){
                         Log.w(TAG,"data check ok");
+                        if (pageTag == DataMessage.PAGE_STATUS){
+                            if (lastAddress == OrderCreater.DEVICE_STATUS){
+                                int datasize = data[2];
+                                byte[] receivedData = new byte[datasize];
+                                System.arraycopy(data, 3, receivedData, 0, datasize);
+                                message.setData(receivedData);
+                                postValue(message);
+                            }
+                        }
                     }
-                    String str = new String(buff, "ISO-8859-1");
-                    str = str.substring(0, bytes);
-
-                    // 收到数据
-                    //Log.e("read", str);
-//                    if (!str.endsWith("#")) {
-//                        recvText.append(str);
-//                        continue;
-//                    }
-//                    recvText.append(str.substring(0, str.length() - 1)); // 去除'#'
-
-                    postValue(message);
                 } catch (IOException e) {
                     e.printStackTrace();
                     break;

@@ -1,5 +1,8 @@
 package com.example.bloothcontroler.service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * @author Hanwenhao
  * @date 2020/4/13
@@ -18,15 +21,21 @@ public class DataMessage {
     public static final int PAGE_MORE = 8;
 
     public int what;
-    private int[] data;
+    private byte[] data;
     private int dataSize;
     private int registerAddress;
 
     public int[] getData() {
-        return data;
+        int[] mdata = new int[dataSize/2];
+        for (int i = 0;i < data.length;i+=2){
+            int high = (data[i] & 0x00FF) << 8;
+            int low = data[i + 1] & 0x00FF;
+            mdata[i/2] = high + low;
+        }
+        return mdata;
     }
 
-    public void setData(int[] data) {
+    public void setData(byte[] data) {
         this.data = data;
     }
 
