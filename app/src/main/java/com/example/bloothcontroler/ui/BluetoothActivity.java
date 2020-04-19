@@ -317,7 +317,7 @@ public class BluetoothActivity extends AppCompatActivity implements View.OnClick
                     Toast.makeText(this, "未连接设备", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                String inputText = sendText.getText().toString() + "@#"; // 发送给单片机数据以"@#结尾"，这样单片机知道一条数据发送结束
+                String inputText = sendText.getText().toString(); // 发送给单片机数据
                 //Toast.makeText(MainActivity.this, inputText, Toast.LENGTH_SHORT).show();
                 connectedThread.write(inputText.getBytes());
                 break;
