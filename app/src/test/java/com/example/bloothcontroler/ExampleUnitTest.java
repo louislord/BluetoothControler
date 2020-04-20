@@ -8,6 +8,8 @@ import com.example.bloothcontroler.service.OrderCreater;
 
 import org.junit.Test;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 
 import static org.junit.Assert.*;
@@ -40,8 +42,8 @@ public class ExampleUnitTest {
         order[0] = 0x01;//从机地址 默认0x01
         order[1] = 0x04;
         order[2] = 4;
-        int num1 = 20422;
-        int num2 = 33587;
+        int num1 = -23;
+        int num2 = 32767;
         byte highRA = (byte) ((num1 & 0xFF00) >> 8);
         byte lowRA = (byte) (num1 & 0x00FF);
         order[3] = highRA;
@@ -63,5 +65,8 @@ public class ExampleUnitTest {
                     message.setDataSize(datasize);
             System.out.println(Arrays.toString(message.getData()));
         }
+
+        BigDecimal b = new BigDecimal(-8897).multiply(new BigDecimal(0.1)).setScale(1, RoundingMode.HALF_UP);
+        System.out.println(b.doubleValue() + "%");
     }
 }

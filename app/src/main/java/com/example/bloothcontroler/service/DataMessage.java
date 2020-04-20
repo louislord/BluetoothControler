@@ -30,7 +30,11 @@ public class DataMessage {
         for (int i = 0;i < data.length;i+=2){
             int high = (data[i] & 0x00FF) << 8;
             int low = data[i + 1] & 0x00FF;
-            mdata[i/2] = high + low;
+            if (high + low >= 0x8000){
+                mdata[i/2] = high + low - 0x10000;
+            } else {
+                mdata[i/2] = high + low;
+            }
         }
         return mdata;
     }

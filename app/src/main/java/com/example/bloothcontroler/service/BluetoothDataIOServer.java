@@ -136,6 +136,7 @@ public class BluetoothDataIOServer extends MutableLiveData<DataMessage> {
                                 byte[] receivedData = new byte[datasize];
                                 System.arraycopy(data, 3, receivedData, 0, datasize);
                                 message.setData(receivedData);
+                                message.what = DataMessage.RECEVED_STATUS_DATA;
                                 postValue(message);
                             }
                         }
