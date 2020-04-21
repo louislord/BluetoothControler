@@ -3,6 +3,7 @@ package com.example.bloothcontroler.ui.home;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +30,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
-
+    private String TAG = "HomeFragment";
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -43,6 +44,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 handleMessage(s);
             }
         });
+        homeViewModel.startCover(OrderCreater.readStatus(),2000);
         return binding.getRoot();
     }
 
@@ -82,7 +84,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void setPVStatus(TextView pv,int status){
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.w(TAG,"onPause");
+        homeViewModel.setReady(false);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.w(TAG,"onResume");
+        homeViewModel.setReady(true);
+    }
+
+    private void setPVStatus(TextView pv, int status){
         if (isAdded()){
             if (status == 0x0000){
                 pv.setText(getString(R.string.app_status_unrecoverd));

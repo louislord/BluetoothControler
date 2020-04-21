@@ -140,6 +140,26 @@ public class BluetoothDataIOServer extends MutableLiveData<DataMessage> {
                                 postValue(message);
                             }
                         }
+                        else if (pageTag == DataMessage.PAGE_SETTING){
+                            if (lastAddress == OrderCreater.Pamx){
+                                int datasize = data[2];
+                                byte[] receivedData = new byte[datasize];
+                                System.arraycopy(data, 3, receivedData, 0, datasize);
+                                message.setData(receivedData);
+                                message.what = DataMessage.RECEVED_SETTING_DATA;
+                                postValue(message);
+                            }
+                        }
+                        else if (pageTag == DataMessage.PAGE_IV){
+                            if (lastAddress == OrderCreater.Voc_of_String){
+                                int datasize = data[2];
+                                byte[] receivedData = new byte[datasize];
+                                System.arraycopy(data, 3, receivedData, 0, datasize);
+                                message.setData(receivedData);
+                                message.what = DataMessage.RECEVED_IV_DATA;
+                                postValue(message);
+                            }
+                        }
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
