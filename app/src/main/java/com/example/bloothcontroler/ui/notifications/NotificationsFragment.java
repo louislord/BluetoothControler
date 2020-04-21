@@ -85,6 +85,7 @@ public class NotificationsFragment extends Fragment {
     public void onResume() {
         super.onResume();
         notificationsViewModel.setReady(true);
+        notificationsViewModel.sendOrder(OrderCreater.generalReadOrder(OrderCreater.Voc_of_String,6));
     }
 
     @Override
