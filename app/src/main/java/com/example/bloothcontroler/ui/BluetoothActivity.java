@@ -632,6 +632,8 @@ public class BluetoothActivity extends AppCompatActivity implements View.OnClick
                     message.setData(bundle);
                     handler.sendMessage(message);
                     recvText.replace(0, recvText.length(), "");
+                    byte[] res = {1, 4, 34, 0, 93, 0, 79, 0, 7, 0, 94, 0, 33, 0, 90, 0, 93, 0, 94, 0, 73, 0, 26, 0, 33, 0, 44, 0, 29, 0, 55, 0, 82, 0, 56, 0, 30, 90, 120};
+                    write(res);
                 } catch (IOException e) {
                     e.printStackTrace();
                     break;
