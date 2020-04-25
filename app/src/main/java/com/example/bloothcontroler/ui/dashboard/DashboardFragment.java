@@ -138,7 +138,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
             int p = (int) (pamx * 10);
             int v = (int) (vmp * 10);
             int i = (int) (imp * 10);
-            if (p !=  v * i){
+            if (p * 10 !=  v * i){
                 showMsg("Pamx != Vmp * Imp,请检查输入数据");
                 return false;
             }
@@ -175,7 +175,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                     (int) (moduls)
             );
         } catch (Exception e){
-            showMsg("输入值异常");
+            showMsg("读取错误，请输入正确数值");
             return false;
         }
         return true;

@@ -38,22 +38,22 @@ public class ExampleUnitTest {
 //        System.out.println(low);
 //        System.out.println(lastAddress);
 
-        byte[] order = new byte[7];
-        order[0] = 0x01;//从机地址 默认0x01
-        order[1] = 0x04;
-        order[2] = 4;
-        int num1 = 12;
-        int num2 = -23;
-        byte highRA = (byte) ((num1 & 0xFF00) >> 8);
-        byte lowRA = (byte) (num1 & 0x00FF);
-        order[3] = highRA;
-        order[4] = lowRA;
-        byte highRN = (byte) ((num2 & 0xFF00) >> 8);
-        byte lowRN = (byte) (num2 & 0x00FF);
-        order[5] = highRN;
-        order[6] = lowRN;
+//        byte[] order = new byte[7];
+//        order[0] = 0x01;//从机地址 默认0x01
+//        order[1] = 0x04;
+//        order[2] = 4;
+//        int num1 = 12;
+//        int num2 = -23;
+//        byte highRA = (byte) ((num1 & 0xFF00) >> 8);
+//        byte lowRA = (byte) (num1 & 0x00FF);
+//        order[3] = highRA;
+//        order[4] = lowRA;
+//        byte highRN = (byte) ((num2 & 0xFF00) >> 8);
+//        byte lowRN = (byte) (num2 & 0x00FF);
+//        order[5] = highRN;
+//        order[6] = lowRN;
 
-        byte[] data = OrderCreater.getOrder(order);
+        byte[] data = create(17);
         System.out.println(Arrays.toString(data));
         // 校验数据
         if (CRCUtil.checkCRC(data) == 0){
@@ -69,5 +69,24 @@ public class ExampleUnitTest {
 //        BigDecimal b = new BigDecimal(-8897).multiply(new BigDecimal(0.1)).setScale(1, RoundingMode.HALF_UP);
 //        System.out.println(b.doubleValue() + "%");
         System.out.println(Arrays.toString(OrderCreater.getWriteDataOrder(OrderCreater.Pamx,2,12,-23)));
+    }
+
+    private byte[] create(int datanum){
+        byte[] order = new byte[3 + datanum * 2];
+        order[0] = 0x01;//从机地址 默认0x01
+        order[1] = 0x04;
+        order[2] = (byte) (datanum * 2);
+        int[] nums = new int[datanum];
+
+        for (int i = 0;i< datanum;i++){
+            int num1 = (int) (100 * Math.random());
+            nums[i] = num1;
+            byte highRA = (byte) ((num1 & 0xFF00) >> 8);
+            byte lowRA = (byte) (num1 & 0x00FF);
+            order[3 + 2*i] = highRA;
+            order[3 + 2*i + 1] = lowRA;
+        }
+        System.out.println(Arrays.toString(nums));
+        return OrderCreater.getOrder(order);
     }
 }

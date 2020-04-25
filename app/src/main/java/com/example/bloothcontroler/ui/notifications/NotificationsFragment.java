@@ -1,10 +1,12 @@
 package com.example.bloothcontroler.ui.notifications;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -63,6 +65,13 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (notificationsViewModel.isBTConnected()){
+                    if (TextUtils.isEmpty(binding.edPm.getText())
+                        ||TextUtils.isEmpty(binding.edVoc.getText())
+                        ||TextUtils.isEmpty(binding.edIsc.getText())
+                    ){
+                        showMsg("请输入数据");
+                        return;
+                    }
                     double pamx = Double.parseDouble(binding.edPm.getText().toString());
                     double vmp = Double.parseDouble(binding.edVoc.getText().toString());
                     double imp = Double.parseDouble(binding.edIsc.getText().toString());
@@ -79,6 +88,12 @@ public class NotificationsFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void showMsg(String msg){
+        if (!TextUtils.isEmpty(msg)){
+            Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
