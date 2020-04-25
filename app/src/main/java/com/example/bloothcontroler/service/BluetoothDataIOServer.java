@@ -75,7 +75,7 @@ public class BluetoothDataIOServer extends MutableLiveData<DataMessage> {
         if (bluetoothIOThread != null && order != null){
             bluetoothIOThread.write(order);
             if (order.length > 4){
-                int high = (order[2] & 0xFFFF) << 8;
+                int high = (order[2] & 0xFF) << 8;
                 int low = order[3];
                 lastAddress = high + low;
             }

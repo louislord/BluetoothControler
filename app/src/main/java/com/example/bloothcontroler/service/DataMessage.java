@@ -26,7 +26,7 @@ public class DataMessage {
     private int registerAddress;
 
     public int[] getData() {
-        int[] mdata = new int[dataSize/2];
+        int[] mdata = new int[data.length/2];
         for (int i = 0;i < data.length;i+=2){
             int high = (data[i] & 0x00FF) << 8;
             int low = data[i + 1] & 0x00FF;
