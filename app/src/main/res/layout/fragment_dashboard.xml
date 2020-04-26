@@ -102,6 +102,7 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/edVmp"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             android:layout_weight="1"
@@ -128,6 +129,7 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/edImp"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             android:layout_weight="1"
@@ -154,6 +156,7 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/edVoc"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             android:layout_weight="1"
@@ -180,6 +183,7 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/edIsc"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             android:layout_weight="1"
@@ -262,6 +266,7 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/edCells"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             android:layout_weight="1"
@@ -288,6 +293,7 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/edYear"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             android:layout_weight="1"
@@ -314,6 +320,7 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/edModuls"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             android:layout_weight="1"
@@ -341,6 +348,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/llStatus" />
 
                 <ImageView
+                    android:id="@+id/imgEdit"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginTop="10dp"

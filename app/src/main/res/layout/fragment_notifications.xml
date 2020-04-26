@@ -6,333 +6,329 @@
 
     </data>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/text_notifications"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="Base Information"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:id="@+id/llStatus"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_notifications">
+                <TextView
+                    android:id="@+id/text_notifications"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Base Information"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
+                    android:id="@+id/llStatus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:background="@color/base_item_bg_green"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="Items"
-                        android:textColor="@color/base_black"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="start"
-                        android:text="Value"
-                        android:textColor="@color/base_black"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:gravity="start"
-                        android:text="Unit"
-                        android:textColor="@color/base_black"
-                        android:textSize="16sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="Voc of String"
-                        android:textColor="@color/base_black"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_weight="1"
-                        android:gravity="start|center_vertical"
-                        android:maxLength="30"
-                        android:maxLines="1"
-                        android:textColor="@color/base_black"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_weight="2"
-                        android:gravity="start|center_vertical"
-                        android:maxLength="30"
-                        android:maxLines="1"
-                        android:text="V"
-                        android:textColor="@color/base_black"
-                        android:textSize="16sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="Irradiation"
-                        android:textColor="@color/base_black"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_weight="1"
-                        android:gravity="start|center_vertical"
-                        android:maxLength="30"
-                        android:maxLines="1"
-                        android:textColor="@color/base_black"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_weight="2"
-                        android:gravity="start|center_vertical"
-                        android:maxLength="30"
-                        android:maxLines="1"
-                        android:text="W/m2"
-                        android:textColor="@color/base_black"
-                        android:textSize="16sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="Temperation"
-                        android:textColor="@color/base_black"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_weight="1"
-                        android:gravity="start|center_vertical"
-                        android:maxLength="30"
-                        android:maxLines="1"
-                        android:textColor="@color/base_black"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_weight="2"
-                        android:gravity="start|center_vertical"
-                        android:maxLength="30"
-                        android:maxLines="1"
-                        android:text="℃"
-                        android:textColor="@color/base_black"
-                        android:textSize="16sp" />
-                </LinearLayout>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_notifications">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_marginTop="10dp"
+                        android:background="@color/base_item_bg_green"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:layout_weight="2"
+                            android:text="Items"
+                            android:textColor="@color/base_black"
+                            android:textSize="16sp" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:text="T of Pm"
-                                android:textColor="@color/base_black"
-                                android:textSize="16sp" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="40dp"
-                                android:layout_weight="1"
-                                android:gravity="start|center_vertical"
-                                android:inputType="numberDecimal"
-                                android:maxLength="30"
-                                android:maxLines="1"
-                                android:textColor="@color/base_black"
-                                android:textSize="16sp" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="40dp"
-                                android:layout_weight="2"
-                                android:gravity="start|center_vertical"
-                                android:maxLength="30"
-                                android:maxLines="1"
-                                android:text="%/℃"
-                                android:textColor="@color/base_black"
-                                android:textSize="16sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            android:text="Value"
+                            android:textColor="@color/base_black"
+                            android:textSize="16sp" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:text="T of Voc"
-                                android:textColor="@color/base_black"
-                                android:textSize="16sp" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="40dp"
-                                android:layout_weight="1"
-                                android:gravity="start|center_vertical"
-                                android:inputType="numberDecimal"
-                                android:maxLength="30"
-                                android:maxLines="1"
-                                android:textColor="@color/base_black"
-                                android:textSize="16sp" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="40dp"
-                                android:layout_weight="2"
-                                android:gravity="start|center_vertical"
-                                android:maxLength="30"
-                                android:maxLines="1"
-                                android:text="%/℃"
-                                android:textColor="@color/base_black"
-                                android:textSize="16sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:text="T of Isc"
-                                android:textColor="@color/base_black"
-                                android:textSize="16sp" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="40dp"
-                                android:layout_weight="1"
-                                android:gravity="start|center_vertical"
-                                android:inputType="numberDecimal"
-                                android:maxLength="30"
-                                android:maxLines="1"
-                                android:textColor="@color/base_black"
-                                android:textSize="16sp" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="40dp"
-                                android:layout_weight="2"
-                                android:gravity="start|center_vertical"
-                                android:maxLength="30"
-                                android:maxLines="1"
-                                android:text="%/℃"
-                                android:textColor="@color/base_black"
-                                android:textSize="16sp" />
-                        </LinearLayout>
+                            android:layout_weight="2"
+                            android:gravity="start"
+                            android:text="Unit"
+                            android:textColor="@color/base_black"
+                            android:textSize="16sp" />
                     </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center_vertical|end"
-                        android:layout_marginEnd="15dp"
-                        android:background="@drawable/app_shape_black_btn_bg"
-                        android:src="@drawable/ic_edit_black_24dp" />
-                </FrameLayout>
-            </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tab_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:tabIndicatorColor="@color/colorPrimary"
-                app:tabIndicatorFullWidth="false"
-                app:tabIndicatorHeight="2dp"
-                app:tabRippleColor="@android:color/transparent"
-                app:tabSelectedTextColor="@color/colorPrimary"
-                app:tabTextColor="@color/base_black">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:text="Voc of String"
+                            android:textColor="@color/base_black"
+                            android:textSize="16sp" />
 
-            </com.google.android.material.tabs.TabLayout>
+                        <TextView
+                            android:id="@+id/tvVoc"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:gravity="start|center_vertical"
+                            android:maxLength="30"
+                            android:maxLines="1"
+                            android:textColor="@color/base_black"
+                            android:textSize="16sp" />
 
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/view_pager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingBottom="20dp"/>
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="2"
+                            android:gravity="start|center_vertical"
+                            android:maxLength="30"
+                            android:maxLines="1"
+                            android:text="V"
+                            android:textColor="@color/base_black"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:text="Irradiation"
+                            android:textColor="@color/base_black"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tvIrr"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:gravity="start|center_vertical"
+                            android:maxLength="30"
+                            android:maxLines="1"
+                            android:textColor="@color/base_black"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="2"
+                            android:gravity="start|center_vertical"
+                            android:maxLength="30"
+                            android:maxLines="1"
+                            android:text="W/m2"
+                            android:textColor="@color/base_black"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:text="Temperation"
+                            android:textColor="@color/base_black"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tvTemp"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:gravity="start|center_vertical"
+                            android:maxLength="30"
+                            android:maxLines="1"
+                            android:textColor="@color/base_black"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="2"
+                            android:gravity="start|center_vertical"
+                            android:maxLength="30"
+                            android:maxLines="1"
+                            android:text="℃"
+                            android:textColor="@color/base_black"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text="T of Pm"
+                                    android:textColor="@color/base_black"
+                                    android:textSize="16sp" />
+
+                                <EditText
+                                    android:id="@+id/edPm"
+                                    android:layout_width="0dp"
+                                    android:layout_height="40dp"
+                                    android:layout_weight="1"
+                                    android:gravity="start|center_vertical"
+                                    android:inputType="numberDecimal"
+                                    android:maxLength="30"
+                                    android:maxLines="1"
+                                    android:textColor="@color/base_black"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="40dp"
+                                    android:layout_weight="2"
+                                    android:gravity="start|center_vertical"
+                                    android:maxLength="30"
+                                    android:maxLines="1"
+                                    android:text="%/℃"
+                                    android:textColor="@color/base_black"
+                                    android:textSize="16sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text="T of Voc"
+                                    android:textColor="@color/base_black"
+                                    android:textSize="16sp" />
+
+                                <EditText
+                                    android:id="@+id/edVoc"
+                                    android:layout_width="0dp"
+                                    android:layout_height="40dp"
+                                    android:layout_weight="1"
+                                    android:gravity="start|center_vertical"
+                                    android:inputType="numberDecimal"
+                                    android:maxLength="30"
+                                    android:maxLines="1"
+                                    android:textColor="@color/base_black"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="40dp"
+                                    android:layout_weight="2"
+                                    android:gravity="start|center_vertical"
+                                    android:maxLength="30"
+                                    android:maxLines="1"
+                                    android:text="%/℃"
+                                    android:textColor="@color/base_black"
+                                    android:textSize="16sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text="T of Isc"
+                                    android:textColor="@color/base_black"
+                                    android:textSize="16sp" />
+
+                                <EditText
+                                    android:id="@+id/edIsc"
+                                    android:layout_width="0dp"
+                                    android:layout_height="40dp"
+                                    android:layout_weight="1"
+                                    android:gravity="start|center_vertical"
+                                    android:inputType="numberDecimal"
+                                    android:maxLength="30"
+                                    android:maxLines="1"
+                                    android:textColor="@color/base_black"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="40dp"
+                                    android:layout_weight="2"
+                                    android:gravity="start|center_vertical"
+                                    android:maxLength="30"
+                                    android:maxLines="1"
+                                    android:text="%/℃"
+                                    android:textColor="@color/base_black"
+                                    android:textSize="16sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/imgEdit"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_vertical|end"
+                            android:layout_marginEnd="15dp"
+                            android:background="@drawable/app_shape_black_btn_bg"
+                            android:src="@drawable/ic_edit_black_24dp" />
+                    </FrameLayout>
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

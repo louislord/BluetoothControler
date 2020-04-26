@@ -101,7 +101,7 @@ public class OrderCreater {
      * @param bytes
      * @return
      */
-    private static byte[] getOrder(byte[] bytes){
+    public static byte[] getOrder(byte[] bytes){
         int crc = CRCUtil.getCRC(bytes);
         byte low = (byte) (crc & 0x00FF);
         byte high = (byte) ((crc & 0xFF00) >> 8);
@@ -110,6 +110,31 @@ public class OrderCreater {
         order[order.length - 2] = high;
         order[order.length - 1] = low;
         return order;
+    }
+
+    public static byte[] getWriteDataOrder(int registerAddress,int registerNum,int... writeData){
+        int length = 7 + writeData.length * 2;
+        byte[] order = new byte[length];
+        order[0] = 0x01;//从机地址 默认0x01
+        order[1] = WRITE;
+        byte highRA = (byte) ((registerAddress & 0xFF00) >> 8);
+        byte lowRA = (byte) (registerAddress & 0x00FF);
+        order[2] = highRA;
+        order[3] = lowRA;
+        byte highRN = (byte) ((registerNum & 0xFF00) >> 8);
+        byte lowRN = (byte) (registerNum & 0x00FF);
+        order[4] = highRN;
+        order[5] = lowRN;
+        order[6] = (byte) (writeData.length * 2);
+        int[] wdata = writeData.clone();
+        for (int i = 0;i < wdata.length;i ++){
+            int num = wdata[i];
+            byte high = (byte) ((num & 0xFF00) >> 8);
+            byte low = (byte) (num & 0x00FF);
+            order[6 + i*2 + 1] = high;
+            order[6 + i*2 + 2] = low;
+        }
+        return getOrder(order);
     }
 
     /**

@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 
 /**
  * @author Hanwenhao
@@ -21,11 +22,15 @@ import java.nio.ByteBuffer;
 public class BluetoothDataIOServer extends MutableLiveData<DataMessage> {
 
     private boolean isConnected;
-
+    private int pageTag;
+    private int lastAddress;
     public boolean isConnected() {
         return isConnected;
     }
 
+    public void setPageTag(int pageTag){
+        this.pageTag = pageTag;
+    }
     private BluetoothDataIOServer(){
 
     }
@@ -66,9 +71,14 @@ public class BluetoothDataIOServer extends MutableLiveData<DataMessage> {
         }
     }
 
-    public void sendOrder(byte[] order){
+    public synchronized void sendOrder(byte[] order){
         if (bluetoothIOThread != null && order != null){
             bluetoothIOThread.write(order);
+            if (order.length > 4){
+                int high = (order[2] & 0xFF) << 8;
+                int low = order[3];
+                lastAddress = high + low;
+            }
         }
     }
 
@@ -117,21 +127,40 @@ public class BluetoothDataIOServer extends MutableLiveData<DataMessage> {
                     }
                     byte[] data = new byte[bytes];
                     System.arraycopy(buff, 0, data, 0, bytes);
+                    // 校验数据
                     if (CRCUtil.checkCRC(data) == 0){
                         Log.w(TAG,"data check ok");
+                        if (pageTag == DataMessage.PAGE_STATUS){
+                            if (lastAddress == OrderCreater.DEVICE_STATUS){
+                                int datasize = data[2];
+                                byte[] receivedData = new byte[datasize];
+                                System.arraycopy(data, 3, receivedData, 0, datasize);
+                                message.setData(receivedData);
+                                message.what = DataMessage.RECEVED_STATUS_DATA;
+                                postValue(message);
+                            }
+                        }
+                        else if (pageTag == DataMessage.PAGE_SETTING){
+                            if (lastAddress == OrderCreater.Pamx){
+                                int datasize = data[2];
+                                byte[] receivedData = new byte[datasize];
+                                System.arraycopy(data, 3, receivedData, 0, datasize);
+                                message.setData(receivedData);
+                                message.what = DataMessage.RECEVED_SETTING_DATA;
+                                postValue(message);
+                            }
+                        }
+                        else if (pageTag == DataMessage.PAGE_IV){
+                            if (lastAddress == OrderCreater.Voc_of_String){
+                                int datasize = data[2];
+                                byte[] receivedData = new byte[datasize];
+                                System.arraycopy(data, 3, receivedData, 0, datasize);
+                                message.setData(receivedData);
+                                message.what = DataMessage.RECEVED_IV_DATA;
+                                postValue(message);
+                            }
+                        }
                     }
-                    String str = new String(buff, "ISO-8859-1");
-                    str = str.substring(0, bytes);
-
-                    // 收到数据
-                    //Log.e("read", str);
-//                    if (!str.endsWith("#")) {
-//                        recvText.append(str);
-//                        continue;
-//                    }
-//                    recvText.append(str.substring(0, str.length() - 1)); // 去除'#'
-
-                    postValue(message);
                 } catch (IOException e) {
                     e.printStackTrace();
                     break;
@@ -153,6 +182,7 @@ public class BluetoothDataIOServer extends MutableLiveData<DataMessage> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            isConnected = false;
         }
     }
 }
