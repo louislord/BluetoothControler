@@ -180,7 +180,7 @@ public class LineChartFragment extends LazyFragment {
         set.setFillColor(lineColor);
         set.setColor(lineColor);
         set.setFillAlpha(50);
-        set.setLineWidth(1f);
+        set.setLineWidth(2f);
         set.setDrawCircles(false);
         set.setDrawValues(true);
         return set;

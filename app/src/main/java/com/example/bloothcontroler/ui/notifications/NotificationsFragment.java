@@ -29,10 +29,12 @@ import com.example.bloothcontroler.service.DataMessage;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
+
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.example.bloothcontroler.service.OrderCreater;
 
 public class NotificationsFragment extends Fragment {
@@ -40,17 +42,14 @@ public class NotificationsFragment extends Fragment {
     private NotificationsViewModel notificationsViewModel;
     private String[] titles = new String[]{"PV1", "PV2", "PV3", "PV4"};
     private List<Fragment> fragmentList = new ArrayList<>();
-
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
-
     private FragmentNotificationsBinding binding;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         notificationsViewModel =
                 ViewModelProviders.of(this).get(NotificationsViewModel.class);
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_notifications, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_notifications, container, false);
         notificationsViewModel.getText().observe(this, new Observer<DataMessage>() {
             @Override
             public void onChanged(@Nullable DataMessage s) {
@@ -67,13 +66,13 @@ public class NotificationsFragment extends Fragment {
             switch (message.what) {
                 case DataMessage.RECEVED_IV_DATA:
                     int[] data = message.getData();
-                    if (data.length > 5){
+                    if (data.length > 5) {
                         binding.tvVoc.setText(String.valueOf(notificationsViewModel.getValue(data[0])));
                         binding.tvIrr.setText(String.valueOf(notificationsViewModel.getValue(data[1])));
                         binding.tvTemp.setText(String.valueOf(notificationsViewModel.getValue(data[2])));
-                        binding.edPm.setText(String.valueOf(notificationsViewModel.getValue(data[3],0.01)));
-                        binding.edVoc.setText(String.valueOf(notificationsViewModel.getValue(data[4],0.01)));
-                        binding.edIsc.setText(String.valueOf(notificationsViewModel.getValue(data[5],0.01)));
+                        binding.edPm.setText(String.valueOf(notificationsViewModel.getValue(data[3], 0.01)));
+                        binding.edVoc.setText(String.valueOf(notificationsViewModel.getValue(data[4], 0.01)));
+                        binding.edIsc.setText(String.valueOf(notificationsViewModel.getValue(data[5], 0.01)));
                     }
                     break;
             }
@@ -86,11 +85,11 @@ public class NotificationsFragment extends Fragment {
         binding.imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (notificationsViewModel.isBTConnected()){
+                if (notificationsViewModel.isBTConnected()) {
                     if (TextUtils.isEmpty(binding.edPm.getText())
-                        ||TextUtils.isEmpty(binding.edVoc.getText())
-                        ||TextUtils.isEmpty(binding.edIsc.getText())
-                    ){
+                            || TextUtils.isEmpty(binding.edVoc.getText())
+                            || TextUtils.isEmpty(binding.edIsc.getText())
+                    ) {
                         showMsg("请输入数据");
                         return;
                     }
@@ -101,7 +100,7 @@ public class NotificationsFragment extends Fragment {
                     int p = (int) (pamx * 10);
                     int v = (int) (vmp * 10);
                     int i = (int) (imp * 10);
-                    byte[] editOrder = OrderCreater.getWriteDataOrder(OrderCreater.T_of_Pm,3,
+                    byte[] editOrder = OrderCreater.getWriteDataOrder(OrderCreater.T_of_Pm, 3,
                             p,
                             v,
                             i
@@ -114,17 +113,17 @@ public class NotificationsFragment extends Fragment {
             fragmentList.add(LineChartFragment.getInstance(title));
         }
         MyPagerAdapter pagerAdapter = new MyPagerAdapter(getContext(), fragmentList, getChildFragmentManager());
-        viewPager.setAdapter(pagerAdapter);
+        binding.viewPager.setAdapter(pagerAdapter);
         for (String title : titles) {
-            tabLayout.addTab(tabLayout.newTab().setText(title));
+            binding.tabLayout.addTab(binding.tabLayout.newTab().setText(title));
         }
 
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
+        binding.viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(binding.tabLayout));
+        binding.tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(binding.viewPager));
     }
 
-    private void showMsg(String msg){
-        if (!TextUtils.isEmpty(msg)){
+    private void showMsg(String msg) {
+        if (!TextUtils.isEmpty(msg)) {
             Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
         }
     }
@@ -133,7 +132,7 @@ public class NotificationsFragment extends Fragment {
     public void onResume() {
         super.onResume();
         notificationsViewModel.setReady(true);
-        notificationsViewModel.sendOrder(OrderCreater.generalReadOrder(OrderCreater.Voc_of_String,6));
+        notificationsViewModel.sendOrder(OrderCreater.generalReadOrder(OrderCreater.Voc_of_String, 6));
     }
 
     @Override
