@@ -7,5 +7,4 @@ import androidx.lifecycle.ViewModel;
 import com.example.bloothcontroler.base.BaseBCViewModel;
 
 public class NotificationsViewModel extends BaseBCViewModel {
-
 }

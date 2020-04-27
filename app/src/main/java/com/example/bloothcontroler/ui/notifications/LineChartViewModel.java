@@ -9,4 +9,6 @@ import com.example.bloothcontroler.base.BaseBCViewModel;
  * @version:
  */
 public class LineChartViewModel extends BaseBCViewModel {
+
+
 }

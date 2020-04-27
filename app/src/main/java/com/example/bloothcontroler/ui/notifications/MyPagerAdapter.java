@@ -17,7 +17,6 @@ import java.util.List;
  * @version:
  */
 public class MyPagerAdapter extends FragmentStatePagerAdapter {
-
     private Context context;
     private List<Fragment> list;
 

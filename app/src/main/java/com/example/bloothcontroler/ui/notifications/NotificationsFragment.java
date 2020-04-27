@@ -127,7 +127,6 @@ public class NotificationsFragment extends Fragment {
             Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
         }
     }
-
     @Override
     public void onResume() {
         super.onResume();

@@ -185,7 +185,6 @@ public class LineChartFragment extends LazyFragment {
         set.setDrawValues(true);
         return set;
     }
-
     /**
      * 添加点
      * @param index LineData 集合下标
